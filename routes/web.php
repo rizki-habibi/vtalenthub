@@ -6,7 +6,9 @@ use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CounselingController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\InnovationController;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TalentController;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -83,4 +85,12 @@ Route::middleware('auth')->group(function () {
 
     // Settings
     Route::get('/settings', fn () => view('dashboard.settings'))->name('settings');
+
+    // Pencarian Global Lintas Modul
+    Route::get('/api/search', [SearchController::class, 'query'])->name('api.search');
+
+    // Inovasi & Ide AI Generator
+    Route::resource('innovations', InnovationController::class)->only(['index', 'store']);
+    Route::post('/innovations/generate-ai', [InnovationController::class, 'generateAi'])->name('innovations.generate-ai');
+    Route::post('/innovations/{innovation}/upvote', [InnovationController::class, 'upvote'])->name('innovations.upvote');
 });

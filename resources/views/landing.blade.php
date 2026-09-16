@@ -20,6 +20,7 @@
             <div class="hidden md:flex items-center gap-6 text-xs font-medium">
                 <a href="#about" class="text-slate-600 dark:text-slate-300 hover:text-sky-400 transition-colors">Tentang</a>
                 <a href="#showcase" class="text-slate-600 dark:text-slate-300 hover:text-sky-400 transition-colors">Galeri Foto</a>
+                <a href="#innovations" class="text-slate-600 dark:text-slate-300 hover:text-sky-400 transition-colors">Inovasi AI</a>
                 <a href="#services" class="text-slate-600 dark:text-slate-300 hover:text-sky-400 transition-colors">Layanan</a>
                 <a href="#roadmap" class="text-slate-600 dark:text-slate-300 hover:text-sky-400 transition-colors">Roadmap</a>
                 <a href="#pricing" class="text-slate-600 dark:text-slate-300 hover:text-sky-400 transition-colors">Paket</a>
@@ -132,56 +133,56 @@
     </div>
 </section>
 
-<!-- ===== 2. GALERI 4 BINGKAI FOTO STATIS ===== -->
+<!-- ===== 2. GALERI 4 BINGKAI FOTO (DATA DINAMIS DARI DATABASE / SEEDER) ===== -->
 <section id="showcase" class="py-20 border-t border-slate-200/50 dark:border-slate-800/60 bg-slate-900/20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-2xl mx-auto" data-aos="fade-up">
-            <span class="text-xs uppercase tracking-wider font-semibold text-sky-400">Koleksi Visual Talent</span>
-            <h2 class="text-3xl font-bold mt-2">Empat Bingkai Foto & Aset Statis</h2>
-            <p class="text-sm text-slate-600 dark:text-slate-400 mt-3">
-                Ruang siap pakai untuk menampilkan model karakter, wallpaper resmi, banner debut, dan karya kolaborasi klien.
-            </p>
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4" data-aos="fade-up">
+            <div>
+                <span class="text-xs uppercase tracking-wider font-semibold text-sky-400">Koleksi Visual Dinamis</span>
+                <h2 class="text-3xl font-bold mt-2">Empat Bingkai Portofolio & Aset</h2>
+                <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">
+                    Dikelola langsung melalui basis data agensi dan terintegrasi otomatis dengan katalog talent.
+                </p>
+            </div>
+            <a href="{{ route('talents.index') }}" class="text-xs text-sky-400 hover:underline flex items-center gap-1 font-semibold">
+                <span>Kelola Database</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </a>
         </div>
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
-            @php
-            $frames = [
-                ['slot' => '1', 'name' => 'Foto Model Karakter', 'file' => 'frame-1.png', 'desc' => 'Desain model Live2D / 3D avatar', 'tag' => 'AVATAR RIG'],
-                ['slot' => '2', 'name' => 'Wallpaper Background', 'file' => 'frame-2.png', 'desc' => 'Latar belakang tema siaran', 'tag' => 'ROOM BACKDROP'],
-                ['slot' => '3', 'name' => 'Banner Kolaborasi', 'file' => 'frame-3.png', 'desc' => 'Materi promosi brand sponsor', 'tag' => 'SPONSOR KIT'],
-                ['slot' => '4', 'name' => 'Dokumentasi Acara', 'file' => 'frame-4.png', 'desc' => 'Live event & momen siaran spesial', 'tag' => 'EVENT STREAM'],
-            ];
-            @endphp
-
-            @foreach($frames as $i => $f)
+            @forelse($showcases as $i => $sc)
             <div class="glass-auto rounded-2xl p-4 border border-slate-200/50 dark:border-slate-800 hover:border-sky-500/40 transition-all flex flex-col justify-between" data-aos="fade-up" data-aos-delay="{{ $i * 80 }}">
                 <div class="aspect-video w-full rounded-xl bg-slate-900/90 border border-slate-800 relative overflow-hidden flex flex-col items-center justify-center text-center p-4 group">
-                    <!-- Gambar Statis -->
-                    <img src="{{ asset('images/' . $f['file']) }}" 
-                         alt="{{ $f['name'] }}" 
+                    <img src="{{ asset($sc->image_url) }}" 
+                         alt="{{ $sc->title }}" 
                          class="absolute inset-0 w-full h-full object-cover hidden" 
                          onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');">
                     
-                    <!-- Fallback Placeholder -->
                     <div class="flex flex-col items-center justify-center gap-2">
                         <div class="w-10 h-10 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center">
                             <i data-lucide="image" class="w-5 h-5"></i>
                         </div>
-                        <span class="text-xs font-bold text-slate-300">Bingkai {{ $f['slot'] }}</span>
-                        <span class="text-[10px] font-mono text-slate-500">public/images/{{ $f['file'] }}</span>
+                        <span class="text-xs font-bold text-slate-300">Bingkai {{ $i + 1 }}</span>
+                        <span class="text-[10px] font-mono text-slate-500">public/{{ $sc->image_url }}</span>
                     </div>
 
                     <span class="absolute top-2 right-2 text-[9px] font-mono px-2 py-0.5 rounded bg-slate-950/80 border border-slate-700 text-sky-400">
-                        {{ $f['tag'] }}
+                        {{ $sc->category }}
                     </span>
                 </div>
 
                 <div class="mt-4">
-                    <h3 class="text-sm font-bold tracking-tight">{{ $f['name'] }}</h3>
-                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">{{ $f['desc'] }}</p>
+                    <div class="text-[11px] font-mono text-sky-400 font-semibold">{{ $sc->author_or_talent }}</div>
+                    <h3 class="text-sm font-bold tracking-tight mt-0.5">{{ $sc->title }}</h3>
+                    <p class="text-xs text-slate-500 mt-1 leading-relaxed line-clamp-2">{{ $sc->description }}</p>
                 </div>
             </div>
-            @endforeach
+            @empty
+            <div class="col-span-full text-center py-12 text-xs text-slate-500 glass-auto rounded-2xl border border-slate-800">
+                Belum ada data bingkai foto terdata di basis data. Jalankan database seeder.
+            </div>
+            @endforelse
         </div>
     </div>
 </section>
@@ -359,6 +360,61 @@
                 </button>
                 <div x-show="open" x-transition class="px-4 pb-4 text-xs text-slate-600 dark:text-slate-400 leading-relaxed border-t border-slate-800/40 pt-3">
                     {{ $f['a'] }}
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+<!-- ===== 7.5. BANK INOVASI & RISET AI (PRODUK BARU YANG DIKEMBANGKAN) ===== -->
+<section id="innovations" class="py-20 bg-slate-900/40 border-y border-slate-200/50 dark:border-slate-800/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4" data-aos="fade-up">
+            <div>
+                <span class="text-xs uppercase tracking-wider font-semibold text-sky-400">Riset Celah Pasar & Produk Baru</span>
+                <h2 class="text-3xl font-bold mt-2">Bank Ide & Inovasi Komersialisasi</h2>
+                <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">
+                    Ide produk virtual talent yang belum digarap secara global, dikembangkan otomatis berbasis data untuk mendatangkan profit.
+                </p>
+            </div>
+            @auth
+            <a href="{{ route('innovations.index') }}" class="bg-sky-500 hover:bg-sky-400 text-slate-950 px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 shadow-md shadow-sky-500/20">
+                <i data-lucide="sparkles" class="w-4 h-4"></i>
+                <span>Buka Bank Inovasi AI</span>
+            </a>
+            @endauth
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6 mt-12">
+            @foreach($innovations as $inno)
+            <div class="glass-auto rounded-2xl p-6 border border-slate-200/50 dark:border-slate-800 hover:border-sky-500/40 transition-all flex flex-col justify-between" data-aos="fade-up">
+                <div>
+                    <div class="flex items-center justify-between gap-2">
+                        <span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded-full bg-sky-500/10 text-sky-400 border border-sky-500/20">
+                            {{ str_replace('_', ' ', $inno->category) }}
+                        </span>
+                        @if($inno->generated_by_ai)
+                        <span class="text-[10px] font-mono text-emerald-400 flex items-center gap-1">
+                            <i data-lucide="bot" class="w-3 h-3"></i>
+                            <span>AI SYNTHESIZED</span>
+                        </span>
+                        @endif
+                    </div>
+                    <h3 class="text-base font-bold tracking-tight mt-3">{{ $inno->title }}</h3>
+                    <div class="mt-3 text-xs">
+                        <div class="text-slate-500 font-semibold">Celah Pasar:</div>
+                        <p class="text-slate-400 mt-0.5 leading-relaxed">{{ $inno->problem_statement }}</p>
+                    </div>
+                    <div class="mt-3 text-xs">
+                        <div class="text-sky-400 font-semibold">Solusi Dikembangkan:</div>
+                        <p class="text-slate-300 mt-0.5 leading-relaxed">{{ $inno->proposed_solution }}</p>
+                    </div>
+                </div>
+
+                <div class="pt-4 mt-4 border-t border-slate-800/80 flex items-center justify-between text-xs">
+                    <span class="font-mono text-[11px] text-emerald-400">{{ $inno->monetization_potential }}</span>
+                    <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-400 uppercase font-mono">{{ $inno->status }}</span>
                 </div>
             </div>
             @endforeach

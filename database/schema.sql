@@ -153,3 +153,35 @@ CREATE TABLE IF NOT EXISTS team_members (
     updated_at TIMESTAMP NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
 );
+
+CREATE TABLE IF NOT EXISTS showcases (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    category VARCHAR(100) NOT NULL DEFAULT 'AVATAR RIG',
+    image_url VARCHAR(500) NULL,
+    description TEXT NULL,
+    author_or_talent VARCHAR(255) NULL,
+    sort_order INT UNSIGNED NOT NULL DEFAULT 0,
+    is_featured BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at TIMESTAMP NULL,
+    updated_at TIMESTAMP NULL
+);
+
+CREATE TABLE IF NOT EXISTS innovations (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT UNSIGNED NULL,
+    title VARCHAR(255) NOT NULL,
+    category VARCHAR(100) NOT NULL, -- 'asset_tech', 'monetization', 'ai_interaction', 'event_format', 'fan_experience'
+    problem_statement TEXT NOT NULL,
+    proposed_solution TEXT NOT NULL,
+    monetization_potential TEXT NULL,
+    target_audience VARCHAR(255) NULL,
+    status VARCHAR(50) NOT NULL DEFAULT 'concept', -- 'concept', 'research', 'prototyping', 'ready_to_pitch', 'launched'
+    generated_by_ai BOOLEAN NOT NULL DEFAULT FALSE,
+    upvotes INT UNSIGNED NOT NULL DEFAULT 0,
+    created_at TIMESTAMP NULL,
+    updated_at TIMESTAMP NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL,
+    INDEX idx_innovations_category (category),
+    INDEX idx_innovations_status (status)
+);

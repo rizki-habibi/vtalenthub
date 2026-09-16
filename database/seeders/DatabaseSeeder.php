@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\Asset;
 use App\Models\Client;
+use App\Models\Innovation;
+use App\Models\Showcase;
 use App\Models\Talent;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -152,6 +154,87 @@ class DatabaseSeeder extends Seeder
             'type' => 'talent-hire',
             'deal_value' => 12000000,
             'notes' => 'Host live streaming showcase demo game lokal.',
+        ]);
+
+        // SHOWCASES (4 Bingkai Foto Dinamis Landing Page)
+        Showcase::create([
+            'title' => 'Desain Model Karakter Cyberpunk Live2D',
+            'category' => 'AVATAR RIG',
+            'image_url' => 'images/frame-1.png',
+            'description' => 'Model rigging 60FPS dengan ekspresi dinamis dan pelacakan sudut wajah penuh.',
+            'author_or_talent' => 'Aoi Takahashi',
+            'sort_order' => 1,
+            'is_featured' => true,
+        ]);
+
+        Showcase::create([
+            'title' => 'Latar Siaran Kamar Futuristik 2K',
+            'category' => 'ROOM BACKDROP',
+            'image_url' => 'images/frame-2.png',
+            'description' => 'Background animasi looping dengan pencahayaan neon ambient yang dapat disesuaikan waktu siaran.',
+            'author_or_talent' => 'Agend Data Studio',
+            'sort_order' => 2,
+            'is_featured' => true,
+        ]);
+
+        Showcase::create([
+            'title' => 'Kit Sponsor & Branding Penempatan Brand',
+            'category' => 'SPONSOR KIT',
+            'image_url' => 'images/frame-3.png',
+            'description' => 'Paket promosi komersial terintegrasi untuk kampanye Asus ROG dan Secretlab.',
+            'author_or_talent' => 'Rina Melodia',
+            'sort_order' => 3,
+            'is_featured' => true,
+        ]);
+
+        Showcase::create([
+            'title' => 'Konser Virtual & Live Stream Stage',
+            'category' => 'EVENT STREAM',
+            'image_url' => 'images/frame-4.png',
+            'description' => 'Panggung 3D interaktif untuk siaran khusus perayaan subscriber dan interaksi penonton real-time.',
+            'author_or_talent' => 'Indie Game Festival',
+            'sort_order' => 4,
+            'is_featured' => true,
+        ]);
+
+        // INNOVATIONS (Bank Ide & Inovasi Celah Pasar VTuber 2026)
+        Innovation::create([
+            'user_id' => $admin->id,
+            'title' => 'Autonomous Ambient Sponsor Placement',
+            'category' => 'monetization',
+            'problem_statement' => 'Sponsor tradisional mengganggu siaran karena penempatan overlay statis yang kaku dan menghalangi gameplay.',
+            'proposed_solution' => 'Sistem AI yang mendeteksi momen aman di layar permainan untuk menampilkan logo sponsor secara dinamis dan kontekstual.',
+            'monetization_potential' => 'Revenue share 15% dari setiap tayangan impresi sponsor terverifikasi.',
+            'target_audience' => 'VTuber Gaming & Brand Periferal',
+            'status' => 'ready_to_pitch',
+            'generated_by_ai' => true,
+            'upvotes' => 42,
+        ]);
+
+        Innovation::create([
+            'user_id' => $admin->id,
+            'title' => 'Multilingual Voice-Synced VTuber Avatar Mirror',
+            'category' => 'ai_interaction',
+            'problem_statement' => 'Talenta terhambat menjangkau audiens internasional (Jepang, Inggris, Spanyol) karena keterbatasan bahasa percakapan langsung.',
+            'proposed_solution' => 'Pipeline AI real-time yang menerjemahkan dan mengkloning intonasi suara talent ke bahasa tujuan dengan sinkronisasi bibir model Live2D.',
+            'monetization_potential' => 'Paket langganan bulanan $29/bulan per saluran bahasa.',
+            'target_audience' => 'VTuber Asia Tenggara yang menargetkan pasar Global',
+            'status' => 'prototyping',
+            'generated_by_ai' => true,
+            'upvotes' => 88,
+        ]);
+
+        Innovation::create([
+            'user_id' => $admin->id,
+            'title' => 'Micro-Merchandise Print on Demand Terdesentralisasi',
+            'category' => 'asset_tech',
+            'problem_statement' => 'Kreator independen tidak memiliki modal awal untuk memproduksi stok acrylic stand, kaos, atau stiker dalam jumlah besar.',
+            'proposed_solution' => 'Integrasi katalog aset digital langsung ke vendor pencetak lokal saat ada pesanan penonton tanpa risiko stok mengendap.',
+            'monetization_potential' => 'Margin profit 35-50% per item yang langsung masuk ke kas talenta.',
+            'target_audience' => 'VTuber Pemula hingga Komunitas Menengah',
+            'status' => 'concept',
+            'generated_by_ai' => false,
+            'upvotes' => 31,
         ]);
     }
 }
