@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'VTalentHub') — Virtual Talent Data Agency</title>
-    <meta name="description" content="Platform Data Agency untuk Virtual Talent. Kelola talent, generate asset, konseling, dan kolaborasi client.">
+    <title>@yield('title', 'Agend Data') — Pusat Data & Kebutuhan Virtual Talent</title>
+        <meta name="description" content="Agend Data: Platform riset data dan pengembangan kebutuhan virtual talent menjadi produk siap profit.">
+        <link rel="icon" href="{{ asset('images/logo.png') }}">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:300,400,500,600,700,800,900" rel="stylesheet">
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
@@ -78,7 +79,7 @@
     <div class="loading-screen" id="loadingScreen">
         <div class="flex flex-col items-center gap-4">
             <div class="loader-ring"></div>
-            <div class="text-sm tracking-wider uppercase font-semibold text-primary">VTalentHub</div>
+            <div class="text-sm tracking-wider uppercase font-semibold text-primary">Agend Data</div>
         </div>
     </div>
 

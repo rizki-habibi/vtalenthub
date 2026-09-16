@@ -9,7 +9,7 @@
             <div class="w-9 h-9 rounded-xl bg-sky-500/10 border border-sky-400/30 flex items-center justify-center text-sky-400 shrink-0">
                 <i data-lucide="sparkles" class="w-5 h-5"></i>
             </div>
-            <span x-show="sidebarOpen" x-transition class="text-lg font-bold tracking-tight bg-gradient-to-r from-sky-400 to-blue-500 bg-clip-text text-transparent">VTalentHub</span>
+            <span x-show="sidebarOpen" x-transition class="text-lg font-bold tracking-tight bg-gradient-to-r from-sky-400 to-blue-500 bg-clip-text text-transparent">Agend Data</span>
         </div>
 
         <nav class="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
@@ -67,7 +67,7 @@
                 <div class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-400/30 flex items-center justify-center text-sky-400">
                     <i data-lucide="sparkles" class="w-4 h-4"></i>
                 </div>
-                <span class="font-bold text-sky-400">VTalentHub</span>
+                <span class="font-bold text-sky-400">Agend Data</span>
             </div>
             <button @click="mobileMenu = false" class="text-slate-400 hover:text-slate-200">
                 <i data-lucide="x" class="w-5 h-5"></i>
